@@ -13,8 +13,18 @@ this module can provide you different ways to transport the information to the p
 datetime = time.strftime("%Y-%m-%d", time.localtime())
 datetime = datetime
 
-def send_wechat(msg):
-    token = '93b260243ecd43bf915d7919ff971dca'
+def send_wechat_t(msg):
+    token = os.os.environ.get('SENDKEY_T')
+    title = 'i轻工大打卡通知'
+    content = msg
+    template = 'markdown'
+    url = f"https://www.pushplus.plus/send?token={token}&title={title}&content={content}&template={template}"
+    print(url)
+    r = requests.get(url=url)
+    print(r.text)
+
+def send_wechat_f(msg):
+    token = os.os.environ.get('SENDKEY_F')
     title = 'i轻工大打卡通知'
     content = msg
     template = 'markdown'
@@ -139,12 +149,12 @@ dateStr = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 if run == 1:
     report_status = 1  # 这里是为了以后方便加入retry和其它通知方式
     msg = '打卡成功'+'\n'+'>'+dateStr
-    send_wechat(msg)
+    send_wechat_t(msg)
     print("打卡成功")
 else:
     report_status = 0
     msg = '打卡失败'+'\n'+'>'+dateStr
-    send_wechat(msg)
+    send_wechat_f(msg)
     print("打卡失败")
 
 if notice_type == 1:
