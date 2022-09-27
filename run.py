@@ -1,6 +1,8 @@
 import json
 import os
 import time
+import pytz
+import datetime
 
 from app.encode import encode
 from app.main import service
@@ -12,6 +14,15 @@ this module can provide you different ways to transport the information to the p
 datetime = time.strftime("%Y-%m-%d", time.localtime())
 datetime = datetime
 
+def send_wechat(msg):
+    token = '93b260243ecd43bf915d7919ff971dca'
+    title = 'i轻工大打卡通知'
+    content = msg
+    template = 'markdown'
+    url = f"https://www.pushplus.plus/send?token={token}&title={title}&content={content}&template={template}"
+    print(url)
+    r = requests.get(url=url)
+    print(r.text)
 
 with open("data.json", 'r', encoding='UTF-8') as f:
     load_dict = json.load(f)
@@ -124,11 +135,17 @@ try:
 except:
     pass
 
+dateStr = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S")
+
 if run == 1:
     report_status = 1  # 这里是为了以后方便加入retry和其它通知方式
+    msg = '打卡成功'+'\n'+'>'+dateStr
+    send_wechat(msg)
     print("打卡成功")
 else:
     report_status = 0
+    msg = '打卡失败'+'\n'+'>'+dateStr
+    send_wechat(msg)
     print("打卡失败")
 
 if notice_type == 1:
