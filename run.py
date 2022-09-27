@@ -14,7 +14,7 @@ datetime = time.strftime("%Y-%m-%d", time.localtime())
 datetime = datetime
 
 def send_wechat_t(msg):
-    token = os.os.environ.get('SENDKEY_T')
+    token = os.environ.get('SENDKEY_T')
     title = 'i轻工大打卡通知'
     content = msg
     template = 'markdown'
@@ -24,7 +24,7 @@ def send_wechat_t(msg):
     print(r.text)
 
 def send_wechat_f(msg):
-    token = os.os.environ.get('SENDKEY_F')
+    token = os.environ.get('SENDKEY_F')
     title = 'i轻工大打卡通知'
     content = msg
     template = 'markdown'
