@@ -63,6 +63,8 @@ jobs:
           NUCLEICACIDTEST: ${{ secrets.NUCLEICACIDTEST }}
           NOVACCINEREASON: ${{ secrets.NOVACCINEREASON }}
           NOVACCINEDETAIL: ${{ secrets.NOVACCINEDETAIL }}
+          SENDKEY_T: ${{ secrets.SENDKEY_T }}
+          SENDKEY_F: ${{ secrets.SENDKEY_F }}
         run: |
           # sudo cp -p ./chrome/chromedriver /usr/bin/
           # chmod -R 777 /usr/bin/chromedriver
