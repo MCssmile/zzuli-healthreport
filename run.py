@@ -1,8 +1,7 @@
 import json
 import os
 import time
-import pytz
-import datetime
+import requests
 
 from app.encode import encode
 from app.main import service
@@ -135,7 +134,7 @@ try:
 except:
     pass
 
-dateStr = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S")
+dateStr = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 
 if run == 1:
     report_status = 1  # 这里是为了以后方便加入retry和其它通知方式
